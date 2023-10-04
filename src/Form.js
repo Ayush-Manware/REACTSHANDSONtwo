@@ -5,10 +5,10 @@ export default class Form extends React.Component {
     super();
     this.state = {
       name: "",
-      department: "", 
+      department: "",
       rating: "",
       studentArray: [],
-      error:{}
+      error: {},
     };
   }
 
@@ -16,17 +16,16 @@ export default class Form extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleValidation = ()=>{
-    if(this.state.name = null){
-     alert("Empty Name")
+  handleValidation = () => {
+    if ((this.state.name = null)) {
+      alert("Empty Name");
     }
-  }
+  };
 
   handleSubmit = () => {
-    // this.handleValidation();
     const tempobj = {
       name: this.state.name,
-      department: this.state.department, 
+      department: this.state.department,
       rating: this.state.rating,
     };
 
@@ -44,43 +43,47 @@ export default class Form extends React.Component {
   render() {
     return (
       <>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-          value={this.state.name} 
-          onChange={this.handleInput}
-        />
+        <div className="formContainer">
+          <h2 className="heading">Employer's Feedback Form</h2>
+          <form>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              value={this.state.name}
+              onChange={this.handleInput}
+            />
+            <input
+              type="text"
+              id="department"
+              name="department"
+              placeholder="Department"
+              value={this.state.department}
+              onChange={this.handleInput}
+            />
+            <input
+              type="number"
+              id="rating"
+              name="rating"
+              placeholder="Rating"
+              value={this.state.rating}
+              onChange={this.handleInput}
+            />
+            <button className="submitBtn" type="button" onClick={this.handleSubmit}>
+              Submit
+            </button>
+          </form>
+        </div>
 
-        <input
-          type="text" 
-          id="department" 
-          name="department"
-          placeholder="Department"
-          value={this.state.department} 
-          onChange={this.handleInput}
-        />
-
-        <input
-          type="number"
-          id="rating"
-          name="rating"
-          placeholder="Rating"
-          value={this.state.rating}
-          onChange={this.handleInput}
-        />
-
-        <button type="button" onClick={this.handleSubmit}>
-          Submit
-        </button>
-
-        <div>
+        <div className="container">
           {this.state.studentArray.map((item, index) => {
             return (
-              <div key={index}>
-                <h1>{item.name} || {item.department} || {item.rating}</h1>
-              </div>             
+                <div className="flexDiv" key={index}>
+                  <h1>
+                    {item.name} || {item.department} || {item.rating}
+                  </h1>
+                </div>
             );
           })}
         </div>
