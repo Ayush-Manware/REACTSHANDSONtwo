@@ -16,11 +16,6 @@ export default class Form extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  // handleValidation = () => {
-  //   if ((this.state.name = null)) {
-  //     alert("Empty Name");
-  //   }
-  // };
 
   handleSubmit = () => {
     if (
