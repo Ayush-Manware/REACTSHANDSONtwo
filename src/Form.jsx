@@ -8,7 +8,7 @@ export default class Form extends React.Component {
       department: "",
       rating: "",
       studentArray: [],
-      error: {},
+      // error: {},
     };
   }
 
@@ -23,21 +23,34 @@ export default class Form extends React.Component {
   };
 
   handleSubmit = () => {
-    const tempobj = {
-      name: this.state.name,
-      department: this.state.department,
-      rating: this.state.rating,
-    };
+    if (
+      this.state.name.length > 0 &&
+      this.state.department.length > 0 &&
+      this.state.rating > 0 &&
+      this.state.rating < 5
+    ) {
+      const tempobj = {
+        name: this.state.name,
+        department: this.state.department,
+        rating: this.state.rating,
+      };
 
-    this.setState((prevState) => ({
-      studentArray: [...prevState.studentArray, tempobj],
-    }));
+      this.setState((prevState) => ({
+        studentArray: [...prevState.studentArray, tempobj],
+      }));
 
-    this.setState({
-      name: "",
-      department: "",
-      rating: "",
-    });
+      this.setState({
+        name: "",
+        department: "",
+        rating: "",
+      });
+    } else {
+      alert("Some Input is Invalid")
+    }
+
+    // if(this.state.rating > 5 || this.state.rating < 1){
+    //   alert("Rating is not between 1 to 5")
+    // }
   };
 
   render() {
@@ -70,7 +83,11 @@ export default class Form extends React.Component {
               value={this.state.rating}
               onChange={this.handleInput}
             />
-            <button className="submitBtn" type="button" onClick={this.handleSubmit}>
+            <button
+              className="submitBtn"
+              type="button"
+              onClick={this.handleSubmit}
+            >
               Submit
             </button>
           </form>
@@ -79,11 +96,11 @@ export default class Form extends React.Component {
         <div className="container">
           {this.state.studentArray.map((item, index) => {
             return (
-                <div className="flexDiv" key={index}>
-                  <h1>
-                    {item.name} || {item.department} || {item.rating}
-                  </h1>
-                </div>
+              <div className="flexDiv" key={index}>
+                <h1>
+                  {item.name} || {item.department} || {item.rating}
+                </h1>
+              </div>
             );
           })}
         </div>
